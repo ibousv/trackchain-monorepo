@@ -1,0 +1,13 @@
+{
+  "name": "track-core",
+  "version": "0.0.1.250921",
+  "description": "This is the core module of trackchain",
+  "main": "app.js",
+  "scripts": {
+    "test": ""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
