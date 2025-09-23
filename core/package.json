@@ -2,12 +2,20 @@
   "name": "track-core",
   "version": "0.0.1.250921",
   "description": "This is the core module of trackchain",
+  "type": "module",
   "main": "app.js",
   "scripts": {
-    "test": ""
+    "test": "",
+    "dev": "node app.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs"
+  "dependencies": {
+    "@hashgraph/sdk": "^2.73.1",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "helmet": "^8.1.0"
+  }
 }
