@@ -1,15 +1,21 @@
 import mongoose from 'mongoose'
 
-export default async function databaseConnection(){
-  await mongoose.connect(process.env.MONGOOSE_DATABASE_URI)
+const db =  await mongoose.connect(process.env.MONGOOSE_DATABASE_URI)
   .then(()=> console.log("Connected to Mongoose Cluster successfully"))
   .catch((e)=> console.error(e))
+  
+export default async function databaseConnection(){
+  return db
 }
 
 // Schema 
 // from Owner to User
 export const UserSchema = new mongoose.Schema(
   {
+    _id:{
+    type: String,
+    required: true,
+    },
     name:{
       type: String,
       required: false,
@@ -28,11 +34,7 @@ export const UserSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
-    id:{
-      accountId: {
-        type: String,
-        required: true,
-      },
+    keypair:{
       publicKey: {
         type: String,
         required: true,
@@ -41,8 +43,7 @@ export const UserSchema = new mongoose.Schema(
         type: String,
         required: true,
       },
-    }
-    
+    },
   },
   {
     timestamps: true,
@@ -53,6 +54,10 @@ export const UserSchema = new mongoose.Schema(
 // from Entity to Event
 export const EventSchema = new mongoose.Schema(
   {
+    _id:{
+    type: String,
+    required: true,
+    },
     assetId:{
       type: String,
       required: true,
@@ -76,11 +81,12 @@ export const EventSchema = new mongoose.Schema(
     metadata: {
       type: Object,
       default: null,
+      required: false
     }   
   },
   {
     timestamps: true,
-  }
+  },
 )
 
 export const SupervisorSchema = new mongoose.Schema(
@@ -110,6 +116,8 @@ export const SupervisorSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-  }
+    _id: false,
+  },
+
 )
 

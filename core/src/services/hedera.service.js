@@ -25,7 +25,7 @@ export default async function createAccount(){
   try{
     const tx = new AccountCreateTransaction()
     .setKey(keypair.randomPublicKey)
-    .setInitialBalance(10)
+    .setInitialBalance(100)
 
     const txResponse =await tx.execute(client)
     const receipt = await txResponse.getReceipt(client)
