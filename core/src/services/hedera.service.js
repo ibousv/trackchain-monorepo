@@ -19,7 +19,7 @@ function generateKeypair(){
  
 }
 
-export default async function createAccount(){
+export async function createAccount(){
   const keypair = generateKeypair()
 
   try{
@@ -39,5 +39,9 @@ export default async function createAccount(){
     }catch (e){
       throw new Error("Exception occur during account creation")
     }
+  
+}
+
+export async function createNFT(){
   
 }

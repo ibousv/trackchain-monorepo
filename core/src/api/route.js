@@ -8,7 +8,7 @@ const trackRoutes = express.Router();
   * add & update account method
 */
 trackRoutes.post('/account',trackController.createAccount)
-//trackRoutes.put('/accountid',trackController.updateAccount)
+trackRoutes.put('/account/:id',trackController.updateAccount)
 
 //
 //trackRoutes.post('/event',trackController.createAccount)

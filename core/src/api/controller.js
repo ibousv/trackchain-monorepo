@@ -1,15 +1,11 @@
-import createAccount from "../services/hedera.service.js"
+import {createAccount} from "../services/hedera.service.js"
 import {User} from "../models/data.model.js"
 
 const trackController = {
   async createAccount(req,res){
-    // Process request
     const { name, email, password, phonenumber } = req.body;
-    
-    // Process account credentials
     const {accountId, accountPublicKey, accountPrivateKey} = await createAccount()
 
-    // Save it to the database 
     const user = new User({
       _id: accountId,
       name: name,
@@ -25,10 +21,19 @@ const trackController = {
     res.send(user.toObject())
   },
   async updateAccount(req,res){
-    
-  }
-  async createEvent(req,res){
-   
+    const userId = req.params.id;
+    const data = req.body;
+
+   const userExists = await User.exists({ _id: userId })
+    if (!userExists) {
+      return res.status(404).send({ message: "User not found" })
+    }
+    const updatedUser = await User.findOneAndUpdate(
+      { _id: userId },
+      data,
+      { new: true })
+    res.send(updatedUser.toObject())
+
   }
 }
 export default trackController
