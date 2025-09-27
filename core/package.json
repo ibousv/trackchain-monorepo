@@ -1,5 +1,5 @@
 {
-  "name": "track-core",
+  "name": "track-core module",
   "version": "0.0.1.250926",
   "description": "This is the core module of trackchain",
   "type": "module",
