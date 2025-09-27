@@ -34,6 +34,8 @@ const trackController = {
       { new: true })
     res.send(updatedUser.toObject())
 
-  }
+  },
+
+  
 }
 export default trackController
