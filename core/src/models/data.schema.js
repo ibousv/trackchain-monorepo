@@ -8,8 +8,8 @@ export default async function databaseConnection() {
   return db
 }
 
-// Schema 
-// from Owner to User
+// All Schema
+
 export const UserSchema = new mongoose.Schema(
   {
     _id: {
@@ -50,11 +50,9 @@ export const UserSchema = new mongoose.Schema(
   }
 )
 
-
-// from Entity to Event
 export const EventSchema = new mongoose.Schema(
   {
-    _id: {
+    _id: { // asset_id or serial number gived after minting process
       type: String,
       required: true,
     },

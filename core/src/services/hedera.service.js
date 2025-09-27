@@ -3,7 +3,8 @@ import {
   AccountCreateTransaction,
   TokenCreateTransaction,
   TokenType,
-  TokenSupplyType
+  TokenSupplyType,
+  TokenMintTransaction
 } from "@hashgraph/sdk"
 
 import { client } from "../../config.js"
@@ -55,7 +56,7 @@ export async function createAccount() {
  * @returns {string} tokenId
  */
 export async function initializeCollection(tokenName, tokenSymbol, supplyKey, supervisorAccountId) {
-  const supplyPrivateKey = PrivateKey.fromStringDer(supplyKey);
+  const supplyPrivateKey = PrivateKey.fromStringDer(supplyKey)
 
   //
   try {
@@ -64,7 +65,6 @@ export async function initializeCollection(tokenName, tokenSymbol, supplyKey, su
       .setTokenSymbol(tokenSymbol)
       .setTokenType(TokenType.NonFungibleUnique)
       .setSupplyType(TokenSupplyType.Infinite)
-      //.setMaxSupply(999999999)
       .setInitialSupply(0)
       .setSupplyKey(supplyPrivateKey)
       .setTreasuryAccountId(supervisorAccountId)
@@ -80,9 +80,31 @@ export async function initializeCollection(tokenName, tokenSymbol, supplyKey, su
     return tokenId.toString()
 
   } catch (e) {
-    console.error("NFT initialization failed:", e);
+    console.error("NFT initialization failed:", e)
     throw new Error("Exception occur during NFT initialization")
   }
 
-  
+}
+
+export async function mintNFT(tokenId, supplyKey, metadata) {
+  const supplyPrivateKey = PrivateKey.fromStringDer(supplyKey)
+
+  try {
+    const tx = TokenMintTransaction()
+      .setTokenId(tokenId)
+      .setMetadata([metadata])
+      .freezeWith(client);
+
+    const signedTx = await tx.sign(supplyPrivateKey)
+    const txResponse = await signedTx.execute(client)
+
+    const receipt = await txResponse.getReceipt(client);
+    const serialNumber = receipt.serials[0].low;
+    return serialNumber.toString()
+
+  } catch (e) {
+    console.error("NFT minting failed:", e)
+    throw new Error("Exception occur during the minting process")
+  }
+
 }
