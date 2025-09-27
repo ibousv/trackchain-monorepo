@@ -1,5 +1,4 @@
 import express from "express"
-import cors from "cors"
 import trackRoutes from "./src/api/route.js"
 import databaseConnection from "./src/models/data.schema.js"
 
