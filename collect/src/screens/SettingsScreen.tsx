@@ -31,7 +31,7 @@ export default function SettingsScreen({ user, dataCount, onSignOut }: SettingsS
   };
 
   return (
-    <div className="p-4 space-y-4">
+    <div className="p-4 space-y-4 pb-24">
       {/* Profil utilisateur */}
       <Card className="border-black/10">
         <CardHeader>

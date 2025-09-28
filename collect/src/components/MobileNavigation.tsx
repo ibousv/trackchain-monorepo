@@ -9,7 +9,7 @@ interface MobileNavigationProps {
 
 export default function MobileNavigation({ currentPage, onNavigate }: MobileNavigationProps) {
   return (
-    <nav className="border-t border-black/10 bg-white">
+    <nav className="border-t border-black/10 bg-white/95 backdrop-blur-sm">
       <div className="grid grid-cols-3 h-16">
         <Button
           variant="ghost"

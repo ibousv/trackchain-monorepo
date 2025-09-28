@@ -9,9 +9,11 @@ trackRoutes.put('/account/:id', trackController.updateAccount)
 
 // Supervisor endpoints
 trackRoutes.post('/supervisor', trackController.createSupervisor)
-//trackRoutes.put('/supervisor/:id', trackController.updateAccount)
+trackRoutes.put('/supervisor/:id', trackController.updateAccount)
 
 // Event endpoints
-//trackRoutes.post('/event',trackController.createAccount)
+trackRoutes.post('/event', trackController.createEvent)
+trackRoutes.put('/event/:id', trackController.updateEvent)
+
 
 export default trackRoutes

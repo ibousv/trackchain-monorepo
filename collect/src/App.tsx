@@ -164,16 +164,16 @@ export default function App() {
   };
 
   return (
-    <div className={`min-h-screen bg-white text-black flex flex-col ${isNative ? 'w-full' : 'max-w-md mx-auto border-x border-black/10'}`}>
-      {/* Status indicator pour le mode natif */}
+    <div className={`mobile-app-container bg-white text-black touch-optimized ${isNative ? 'w-full' : 'max-w-md mx-auto border-x border-black/10'}`}>
+      {/* Status bar avec fond clair pour mobile natif */}
       {isNative && (
-        <div className="bg-black text-white text-xs text-center py-1">
+        <div className="status-bar-light safe-area-top text-black text-xs text-center py-1 border-b border-black/5">
           {deviceInfo.platform} • {networkStatus.connected ? 'En ligne' : 'Hors ligne'}
         </div>
       )}
 
-      {/* Header */}
-      <header className="border-b border-black/10 p-4 bg-white sticky top-0 z-10">
+      {/* Header fixe */}
+      <header className="border-b border-black/10 p-4 bg-white/95 backdrop-blur-sm sticky top-0 z-40 safe-area-top">
         <div className="flex items-center justify-center">
           <Logo size="sm" showText={true} />
         </div>
@@ -184,19 +184,23 @@ export default function App() {
         )}
       </header>
 
-      {/* Main Content */}
-      <main className="flex-1 overflow-auto">
-        {renderCurrentPage()}
+      {/* Main Content - Zone scrollable */}
+      <main className="scrollable-content keyboard-adjust">
+        <div className="min-h-full">
+          {renderCurrentPage()}
+        </div>
       </main>
 
-      {/* Bottom Navigation */}
-      <MobileNavigation 
-        currentPage={currentPage}
-        onNavigate={(page) => {
-          setCurrentPage(page);
-          hapticFeedback();
-        }}
-      />
+      {/* Bottom Navigation - Fixe en bas */}
+      <div className="fixed-bottom-nav safe-area-bottom">
+        <MobileNavigation 
+          currentPage={currentPage}
+          onNavigate={(page) => {
+            setCurrentPage(page);
+            hapticFeedback();
+          }}
+        />
+      </div>
 
       <Toaster />
     </div>
