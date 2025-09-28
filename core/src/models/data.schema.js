@@ -56,8 +56,8 @@ export const EventSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    actorId: {
-      type: String,
+    actor: {
+      type: Object,
       required: true,
     },
     eventType: {
@@ -132,4 +132,3 @@ export const SupervisorSchema = new mongoose.Schema(
   },
 
 )
-

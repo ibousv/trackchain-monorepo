@@ -13,7 +13,7 @@ trackRoutes.put('/supervisor/:id', trackController.updateAccount)
 
 // Event endpoints
 trackRoutes.post('/event', trackController.createEvent)
-//trackRoutes.put('/event/:id', trackController.updateEvent)
+trackRoutes.put('/event/:id', trackController.updateEvent)
 
 
 export default trackRoutes
