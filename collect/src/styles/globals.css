@@ -187,3 +187,98 @@
 html {
   font-size: var(--font-size);
 }
+
+/* Configuration pour l'application mobile native */
+@layer base {
+  /* Fix pour la status bar sur mobile - fond clair pour les icônes sombres */
+  :root {
+    color-scheme: light;
+  }
+  
+  /* Viewport mobile optimisé */
+  html, body {
+    height: 100vh;
+    height: 100dvh; /* Dynamic viewport height pour mobile */
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Container principal mobile */
+  .mobile-app-container {
+    height: 100vh;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  
+  /* Status bar avec fond clair pour visibilité des icônes */
+  .status-bar-light {
+    background: linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.8) 100%);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  
+  /* Zone de contenu scrollable */
+  .scrollable-content {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+  
+  /* Navigation fixe en bas */
+  .fixed-bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Gestion du clavier mobile */
+  .keyboard-adjust {
+    padding-bottom: env(keyboard-inset-height, 0);
+  }
+  
+  /* Safe area pour les téléphones avec encoche */
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top, 0);
+  }
+  
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+  
+  /* Optimisations tactiles */
+  .touch-optimized {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+    touch-action: manipulation;
+  }
+  
+  /* Écrans de formulaire avec clavier */
+  .form-screen {
+    height: 100vh;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  
+  .form-content {
+    flex: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: env(keyboard-inset-height, 0);
+  }
+}

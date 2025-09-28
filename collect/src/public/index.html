@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    
+    <!-- Configuration pour la status bar mobile -->
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="light-content" />
+    <meta name="apple-mobile-web-app-title" content="Track-Collect" />
+    
+    <!-- Configuration pour Android -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="application-name" content="Track-Collect" />
+    
+    <!-- Capacitor meta tags -->
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    
+    <title>Track-Collect</title>
+    
+    <style>
+        /* Empêcher le zoom sur les inputs en mode mobile */
+        @media (max-width: 768px) {
+            input[type="text"],
+            input[type="tel"],
+            input[type="password"],
+            input[type="email"],
+            input[type="number"],
+            textarea,
+            select {
+                font-size: 16px !important;
+            }
+        }
+        
+        /* Configuration globale pour l'application mobile */
+        html, body {
+            -webkit-overflow-scrolling: touch;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            overscroll-behavior: none;
+        }
+        
+        /* Status bar pour iOS */
+        @supports (padding-top: env(safe-area-inset-top)) {
+            .status-bar-light {
+                padding-top: env(safe-area-inset-top);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+</body>
+</html>

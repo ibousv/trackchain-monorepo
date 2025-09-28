@@ -96,7 +96,7 @@ export default function DataScreen({ data }: DataScreenProps) {
   }
 
   return (
-    <div className="p-4 space-y-4">
+    <div className="p-4 space-y-4 pb-24">
       {/* Header avec export */}
       <div className="flex items-center justify-between">
         <div>
@@ -112,8 +112,7 @@ export default function DataScreen({ data }: DataScreenProps) {
       </div>
 
       {/* Liste des données */}
-      <ScrollArea className="h-96">
-        <div className="space-y-3">
+      <div className="space-y-3">
           {data.map((item) => {
             const metadata = parseMetadata(item.metadata);
             const eventColorClass = getEventTypeColor(item.event_type);
@@ -169,8 +168,7 @@ export default function DataScreen({ data }: DataScreenProps) {
               </Card>
             );
           })}
-        </div>
-      </ScrollArea>
+      </div>
     </div>
   );
 }

@@ -1,42 +1,42 @@
-import type { CapacitorConfig } from '@capacitor/cli';
+import type { CapacitorConfig } from "@capacitor/cli";
 
 const config: CapacitorConfig = {
-  appId: 'com.trackco.collect',
-  appName: 'Track-Collect',
-  webDir: 'dist',
+  appId: "com.trackco.collect",
+  appName: "Track-Collect",
+  webDir: "dist",
   server: {
-    androidScheme: 'https'
+    androidScheme: "https",
   },
   plugins: {
     App: {
-      launchShowDuration: 0
+      launchShowDuration: 0,
     },
     StatusBar: {
-      style: 'LIGHT',
-      backgroundColor: '#000000'
+      style: "LIGHT",
+      backgroundColor: "#000000",
     },
     Keyboard: {
-      resize: 'body',
-      style: 'dark',
-      resizeOnFullScreen: true
+      resize: "body",
+      style: "dark",
+      resizeOnFullScreen: true,
     },
     Haptics: {},
     Share: {},
     Filesystem: {
-      directory: 'DOCUMENTS'
+      directory: "DOCUMENTS",
     },
     Device: {},
-    Network: {}
+    Network: {},
   },
   ios: {
-    contentInset: 'automatic',
-    backgroundColor: '#ffffff'
+    contentInset: "automatic",
+    backgroundColor: "#ffffff",
   },
   android: {
-    backgroundColor: '#ffffff',
+    backgroundColor: "#ffffff",
     allowMixedContent: true,
-    captureInput: true
-  }
+    captureInput: true,
+  },
 };
 
 export default config;
