@@ -19,7 +19,7 @@ exports.register = async (req, res) => {
     await user.save();
 
     const payload = { userId: user._id, role: user.role };
-    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '7d' });
+    const token = jwt.sign(payload, 'change_me_super_secret', { expiresIn: '7d' });
 
     res.json({ token, user: { id: user._id, name: user.name, email: user.email, role: user.role } });
   } catch (err) { console.error(err); res.status(500).send('Server error'); }
@@ -35,7 +35,7 @@ exports.login = async (req, res) => {
     if (!isMatch) return res.status(400).json({ msg: 'Invalid credentials' });
 
     const payload = { userId: user._id, role: user.role };
-    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '7d' });
+    const token = jwt.sign(payload,'change_me_super_secret', { expiresIn: '7d' });
 
     res.json({ token, user: { id: user._id, name: user.name, email: user.email, role: user.role } });
   } catch (err) { console.error(err); res.status(500).send('Server error'); }

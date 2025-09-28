@@ -1,7 +1,22 @@
 FROM node:18-alpine
+
 WORKDIR /app
-COPY package.json package-lock.json* ./
-RUN npm ci --only=production || npm install
+
+# Copier d'abord les fichiers de dépendances
+COPY package.json package-lock.json ./
+
+# Nettoyer et installer toutes les dépendances
+RUN rm -rf node_modules && npm install --include=optional
+
+# Copier le reste du code
 COPY . .
+
+# Build de l'application
 RUN npm run build
-CMD ["npx", "serve", "-s", "dist", "-l", "3000"]
+
+# Installation de serve
+RUN npm install -g serve
+
+EXPOSE 3000
+
+CMD ["serve", "-s", "dist", "-l", "3000"]

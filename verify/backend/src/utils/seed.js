@@ -30,12 +30,12 @@ module.exports = async function seed() {
     let products = await Product.find();
     if (products.length === 0) {
       const productsData = [
-        { name: 'Maïs Bio', category: 'AGRICULTURE', ownerRole: 'AGRICULTEUR', ownerId: users.find(u => u.role==='AGRICULTEUR')._id, sku: 'SKU-MAIS-001' },
-        { name: 'Riz Local', category: 'AGRICULTURE', ownerRole: 'AGRICULTEUR', ownerId: users.find(u => u.role==='AGRICULTEUR')._id, sku: 'SKU-RIZ-001' },
-        { name: 'Vaccin BCG', category: 'SANTE', ownerRole: 'MEDECIN', ownerId: users.find(u => u.role==='MEDECIN')._id, sku: 'SKU-BCG-001' },
-        { name: 'Paracétamol 500mg', category: 'SANTE', ownerRole: 'MEDECIN', ownerId: users.find(u => u.role==='MEDECIN')._id, sku: 'SKU-PARA-500' },
-        { name: 'Titre Foncier TF-001', category: 'FONCIER', ownerRole: 'FONCIER', ownerId: users.find(u => u.role==='FONCIER')._id, sku: 'SKU-TF-001' },
-        { name: 'Rapport Sanitaire RS-001', category: 'ANAD', ownerRole: 'ANAD', ownerId: users.find(u => u.role==='ANAD')._id, sku: 'SKU-RS-001' }
+        { name: 'Maïs Bio', category: 'AGRICULTURE', ownerRole: 'AGRICULTEUR', owner: users.find(u => u.role==='AGRICULTEUR')._id, sku: 'SKU-MAIS-001' },
+        { name: 'Riz Local', category: 'AGRICULTURE', ownerRole: 'AGRICULTEUR', owner: users.find(u => u.role==='AGRICULTEUR')._id, sku: 'SKU-RIZ-001' },
+        { name: 'Vaccin BCG', category: 'SANTE', ownerRole: 'MEDECIN', owner: users.find(u => u.role==='MEDECIN')._id, sku: 'SKU-BCG-001' },
+        { name: 'Paracétamol 500mg', category: 'SANTE', ownerRole: 'MEDECIN', owner: users.find(u => u.role==='MEDECIN')._id, sku: 'SKU-PARA-500' },
+        { name: 'Titre Foncier TF-001', category: 'FONCIER', ownerRole: 'FONCIER', owner: users.find(u => u.role==='FONCIER')._id, sku: 'SKU-TF-001' },
+        { name: 'Rapport Sanitaire RS-001', category: 'ANAD', ownerRole: 'ANAD', owner: users.find(u => u.role==='ANAD')._id, sku: 'SKU-RS-001' }
       ];
       
 
@@ -52,7 +52,7 @@ module.exports = async function seed() {
         tracesData.push({
           product: p._id,
           description: 'Produit créé',
-          createdBy: p.ownerId,
+          actor: p.owner,   // ✅ ici
           timestamp: new Date(),
           type: 'production'
         });
@@ -61,7 +61,7 @@ module.exports = async function seed() {
           tracesData.push({
             product: p._id,
             description: 'Contrôle sanitaire effectué',
-            createdBy: users.find(u => u.role==='ANAD')._id,
+            actor: users.find(u => u.role==='ANAD')._id,  // ✅ ici
             timestamp: new Date(),
             type: 'inspection'
           });
@@ -70,7 +70,7 @@ module.exports = async function seed() {
         tracesData.push({
           product: p._id,
           description: 'Produit expédié',
-          createdBy: p.ownerId,
+          actor: p.owner,   // ✅ ici
           timestamp: new Date(),
           type: 'transport'
         });
@@ -80,7 +80,9 @@ module.exports = async function seed() {
       console.log('✅ Seeded default traces/events');
     }
 
+
   } catch (err) {
     console.error('❌ Seeding error', err);
   }
 };
+

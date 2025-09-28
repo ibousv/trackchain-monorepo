@@ -22,7 +22,7 @@ app.get('/', (req, res) => res.send({ ok: true, version: 'trackchain-backend-v1'
 
 const PORT = process.env.PORT || 4000;
 
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect("mongodb+srv://ibousv:kim6dEzBJrN8GpzW@cluster0.ktacm2c.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0", { useNewUrlParser: true, useUnifiedTopology: true })
   .then(async () => {
     console.log('Connected to MongoDB');
     await seed();
