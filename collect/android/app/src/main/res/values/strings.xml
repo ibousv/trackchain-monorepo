@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">TrackCo Collect</string>
+    <string name="title_activity_main">TrackCo Collect</string>
+    <string name="package_name">com.trackco.collect</string>
+    <string name="custom_url_scheme">com.trackco.collect</string>
+</resources>
