@@ -25,7 +25,7 @@ const PORT = process.env.PORT || 4000;
 mongoose.connect("mongodb+srv://ibousv:kim6dEzBJrN8GpzW@cluster0.ktacm2c.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0", { useNewUrlParser: true, useUnifiedTopology: true })
   .then(async () => {
     console.log('Connected to MongoDB');
-    await seed();
+    // await seed();
     app.listen(PORT, "0.0.0.0", () => {
       console.log(`🚀 Backend running on port ${PORT}`);
     });

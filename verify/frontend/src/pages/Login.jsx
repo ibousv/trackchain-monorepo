@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import api from '../api/api';
 
 export default function Login() {
@@ -22,6 +23,11 @@ export default function Login() {
     } finally {
       setLoading(false);
     }
+  }
+
+  const handleForgotPassword = () => {
+    // Fonctionnalité à implémenter
+    alert('Fonctionnalité "Mot de passe oublié" à venir');
   }
 
   return (
@@ -64,7 +70,7 @@ export default function Login() {
                   />
                 </div>
 
-                <div className="mb-4">
+                <div className="mb-3">
                   <label htmlFor="password" className="form-label text-secondary fw-medium">
                     Mot de passe
                   </label>
@@ -80,15 +86,38 @@ export default function Login() {
                   />
                 </div>
 
+                {/* Lien mot de passe oublié */}
+                <div className="mb-4 text-end">
+                  <button 
+                    type="button"
+                    className="btn btn-link text-decoration-none p-0 text-muted"
+                    onClick={handleForgotPassword}
+                  >
+                    <i className="fas fa-key me-1"></i>
+                    Mot de passe oublié ?
+                  </button>
+                </div>
+
                 {/* Bouton de connexion */}
                 <button 
                   type="submit" 
-                  className="btn btn-primary btn-lg w-100 fw-semibold py-3"
+                  className="btn btn-primary btn-lg w-100 fw-semibold py-3 mb-3"
                   disabled={loading}
                   style={{ 
                     borderRadius: '10px',
                     background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                    border: 'none'
+                    border: 'none',
+                    transition: 'all 0.3s ease'
+                  }}
+                  onMouseOver={(e) => {
+                    if (!loading) {
+                      e.target.style.transform = 'translateY(-2px)';
+                      e.target.style.boxShadow = '0 8px 25px rgba(102, 126, 234, 0.4)';
+                    }
+                  }}
+                  onMouseOut={(e) => {
+                    e.target.style.transform = 'translateY(0)';
+                    e.target.style.boxShadow = 'none';
                   }}
                 >
                   {loading ? (
@@ -97,9 +126,37 @@ export default function Login() {
                       Connexion en cours...
                     </>
                   ) : (
-                    'Se connecter'
+                    <>
+                      <i className="fas fa-sign-in-alt me-2"></i>
+                      Se connecter
+                    </>
                   )}
                 </button>
+
+                {/* Bouton d'inscription */}
+                <Link 
+                  to="/register" 
+                  className="btn btn-outline-primary btn-lg w-100 fw-semibold py-3"
+                  style={{ 
+                    borderRadius: '10px',
+                    border: '2px solid #667eea',
+                    color: '#667eea',
+                    transition: 'all 0.3s ease'
+                  }}
+                  onMouseOver={(e) => {
+                    e.target.style.background = '#667eea';
+                    e.target.style.color = 'white';
+                    e.target.style.transform = 'translateY(-2px)';
+                  }}
+                  onMouseOut={(e) => {
+                    e.target.style.background = 'transparent';
+                    e.target.style.color = '#667eea';
+                    e.target.style.transform = 'translateY(0)';
+                  }}
+                >
+                  <i className="fas fa-user-plus me-2"></i>
+                  Créer un compte
+                </Link>
               </form>
 
               {/* Message d'erreur */}
@@ -110,38 +167,52 @@ export default function Login() {
                 </div>
               )}
 
+              {/* Séparateur */}
+              <div className="position-relative my-4">
+                <hr />
+                <span className="position-absolute top-50 start-50 translate-middle bg-white px-3 text-muted small">
+                  OU
+                </span>
+              </div>
+
               {/* Rôles d'accès */}
-              <div className="mt-4 pt-3 border-top">
+              <div className="mt-3">
                 <h6 className="text-center text-secondary mb-3">Accès par rôle :</h6>
                 <div className="row g-2 text-center">
                   <div className="col-6">
-                    <span className="badge bg-primary bg-opacity-10 text-primary rounded-pill p-2 w-100">
-                      Agriculteurs
+                    <span className="badge bg-success bg-opacity-10 text-success rounded-pill p-2 w-100 d-flex align-items-center justify-content-center">
+                      <i className="fas fa-seedling me-1 small"></i>
+                      <small>Agriculteurs</small>
                     </span>
                   </div>
                   <div className="col-6">
-                    <span className="badge bg-success bg-opacity-10 text-success rounded-pill p-2 w-100">
-                      Médecins
+                    <span className="badge bg-info bg-opacity-10 text-info rounded-pill p-2 w-100 d-flex align-items-center justify-content-center">
+                      <i className="fas fa-user-doctor me-1 small"></i>
+                      <small>Médecins</small>
                     </span>
                   </div>
                   <div className="col-6">
-                    <span className="badge bg-warning bg-opacity-10 text-warning rounded-pill p-2 w-100">
-                      Fonciers
+                    <span className="badge bg-warning bg-opacity-10 text-warning rounded-pill p-2 w-100 d-flex align-items-center justify-content-center">
+                      <i className="fas fa-landmark me-1 small"></i>
+                      <small>Fonciers</small>
                     </span>
                   </div>
                   <div className="col-6">
-                    <span className="badge bg-info bg-opacity-10 text-info rounded-pill p-2 w-100">
-                      ANAD
+                    <span className="badge bg-primary bg-opacity-10 text-primary rounded-pill p-2 w-100 d-flex align-items-center justify-content-center">
+                      <i className="fas fa-file-medical me-1 small"></i>
+                      <small>ANAD</small>
                     </span>
                   </div>
                 </div>
               </div>
 
-              {/* Footer */}
-              <div className="text-center mt-4">
+              {/* Informations de sécurité */}
+              <div className="text-center mt-4 pt-3 border-top">
                 <small className="text-muted">
                   <i className="fas fa-shield-alt me-1"></i>
-                  Sécurisé par Hedera Hashgraph
+                  Sécurisé par Hedera Hashgraph • 
+                  <i className="fas fa-lock me-1 ms-2"></i>
+                  Données cryptées
                 </small>
               </div>
             </div>
@@ -155,6 +226,32 @@ export default function Login() {
           </div>
         </div>
       </div>
+
+      {/* Styles supplémentaires */}
+      <style>{`
+        .card {
+          backdrop-filter: blur(10px);
+          background: rgba(255, 255, 255, 0.95);
+        }
+        
+        .form-control {
+          border: 1px solid #e9ecef;
+          transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+          box-shadow: 0 0 0 0.25rem rgba(102, 126, 234, 0.25);
+          border-color: #667eea;
+        }
+        
+        .btn-link:hover {
+          color: #667eea !important;
+        }
+        
+        .badge {
+          font-size: 0.75rem;
+        }
+      `}</style>
     </div>
   );
 }
