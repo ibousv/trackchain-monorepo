@@ -149,7 +149,7 @@ export default function EditProduct() {
     }
 
     // Vérifier les permissions
-    const canEdit = user?.role === 'ANAD' ||
+    const canEdit = user?.role === 'ANAD' || user?.role === 'SUPER_ADMIN' || 
         (user?.role === product.ownerRole && product.owner === user?.userId);
 
     if (!canEdit) {

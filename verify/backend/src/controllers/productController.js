@@ -13,7 +13,8 @@ exports.createProduct = async (req, res) => {
         'AGRICULTEUR': 'AGRICULTURE',
         'MEDECIN': 'SANTE', 
         'FONCIER': 'FONCIER',
-        'ANAD': 'ANAD'
+        'ANAD': 'ANAD',
+        'SUPER_ADMIN': 'GENERAL' // SUPER_ADMIN peut créer dans n'importe quelle catégorie
       };
       productCategory = roleCategoryMap[req.user.role] || 'GENERAL';
     }
@@ -78,6 +79,11 @@ exports.listProducts = async (req, res) => {
       case 'ANAD':
         // ANAD peut voir tous les produits
         console.log("Filtre ANAD - Accès à tous les produits");
+        break;
+        
+      case 'SUPER_ADMIN':
+        // SUPER_ADMIN peut voir tous les produits
+        console.log("Filtre SUPER_ADMIN - Accès complet à tous les produits");
         break;
         
       default:
@@ -152,6 +158,11 @@ exports.getProduct = async (req, res) => {
         hasAccess = true;
         break;
         
+      case 'SUPER_ADMIN':
+        // SUPER_ADMIN peut voir tous les produits
+        hasAccess = true;
+        break;
+        
       default:
         // Autres rôles : seulement leurs propres produits
         hasAccess = product.owner && product.owner._id.toString() === userId;
@@ -194,15 +205,15 @@ exports.getDashboardStats = async (req, res) => {
       case 'FONCIER':
         statsQuery.category = 'FONCIER';
         break;
-      // ANAD et autres voient tout
+      // ANAD, SUPER_ADMIN et autres voient tout
     }
 
     const totalProducts = await Product.countDocuments(statsQuery);
     
     // Produits par catégorie selon les permissions
     let productsByCategory = {};
-    if (userRole === 'ANAD') {
-      // ANAD voit toutes les catégories
+    if (userRole === 'ANAD' || userRole === 'SUPER_ADMIN') {
+      // ANAD et SUPER_ADMIN voient toutes les catégories
       productsByCategory = await Product.aggregate([
         { $group: { _id: '$category', count: { $sum: 1 } } }
       ]);
@@ -269,6 +280,11 @@ exports.updateProduct = async (req, res) => {
         
       case 'ANAD':
         // ANAD peut modifier tous les produits
+        canUpdate = true;
+        break;
+        
+      case 'SUPER_ADMIN':
+        // SUPER_ADMIN peut modifier tous les produits
         canUpdate = true;
         break;
         
@@ -344,6 +360,11 @@ exports.deleteProduct = async (req, res) => {
         
       case 'ANAD':
         // ANAD peut supprimer tous les produits (administration)
+        canDelete = true;
+        break;
+        
+      case 'SUPER_ADMIN':
+        // SUPER_ADMIN peut supprimer tous les produits
         canDelete = true;
         break;
         

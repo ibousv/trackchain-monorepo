@@ -94,7 +94,9 @@ export default function Dashboard(){
       case 'FONCIER':
         return { foncier: allCategories.foncier }
       case 'ANAD':
-        return allCategories // ANAD voit tout
+      case 'SUPER_ADMIN':
+        return allCategories // ANAD et SUPER_ADMIN voient tout
+        
       default:
         return allCategories
     }
@@ -123,7 +125,8 @@ export default function Dashboard(){
       'AGRICULTEUR': { label: 'Agriculteur', class: 'bg-success', icon: 'fa-seedling' },
       'MEDECIN': { label: 'Médecin', class: 'bg-info', icon: 'fa-user-doctor' },
       'FONCIER': { label: 'Foncier', class: 'bg-warning', icon: 'fa-landmark' },
-      'ANAD': { label: 'ANAD', class: 'bg-primary', icon: 'fa-file-medical' }
+      'ANAD': { label: 'ANAD', class: 'bg-primary', icon: 'fa-file-medical' },
+      'SUPER_ADMIN': { label: 'Super Admin', class: 'bg-danger', icon: 'fa-crown' }
     }
     const roleInfo = roles[role] || { label: role, class: 'bg-secondary', icon: 'fa-user' }
     return (
@@ -139,7 +142,8 @@ export default function Dashboard(){
       'AGRICULTEUR': 'Tableau de Bord Agriculteur',
       'MEDECIN': 'Tableau de Bord Médical', 
       'FONCIER': 'Tableau de Bord Foncier',
-      'ANAD': 'Tableau de Bord Administrateur'
+      'ANAD': 'Tableau de Bord Administrateur',
+      'SUPER_ADMIN': 'Tableau de Bord Super Administrateur'
     }
     return roleTitles[user?.role] || 'Tableau de Bord TrackChain'
   }
@@ -149,7 +153,8 @@ export default function Dashboard(){
       'AGRICULTEUR': 'Gestion et traçabilité de vos produits agricoles',
       'MEDECIN': 'Suivi des produits de santé et médicaments',
       'FONCIER': 'Gestion des titres fonciers et documents immobiliers',
-      'ANAD': 'Supervision de tous les produits et traçabilité'
+      'ANAD': 'Supervision de tous les produits et traçabilité',
+      'SUPER_ADMIN': 'Administration complète de tous les produits et utilisateurs'
     }
     return roleDescriptions[user?.role] || 'Surveillance organisée par domaines et catégories'
   }
@@ -429,6 +434,7 @@ export default function Dashboard(){
           }
         ]
       case 'ANAD':
+      case 'SUPER_ADMIN':
         return [
           ...baseCards,
           { 
@@ -632,8 +638,13 @@ const ProductCard = ({ product }) => {
               Voir Détails
             </Link>
             <button className="btn btn-outline-secondary btn-sm">
+              <Link
+                to={`/product/edit/${product._id}`}
+                className="btn btn-outline-secondary btn-sm"
+              >
               <i className="fas fa-edit me-1"></i>
               Modifier
+              </Link>
             </button>
           </div>
         </div>

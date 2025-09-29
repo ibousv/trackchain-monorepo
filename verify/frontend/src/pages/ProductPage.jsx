@@ -63,6 +63,7 @@ export default function ProductPage(){
       case 'FONCIER':
         return productCategory === 'FONCIER'
       case 'ANAD':
+      case 'SUPER_ADMIN':  
         return true // ANAD a accès à tout
       default:
         return false
@@ -85,7 +86,8 @@ export default function ProductPage(){
       'AGRICULTEUR': { label: 'Agriculteur', class: 'bg-success', icon: 'fa-seedling' },
       'MEDECIN': { label: 'Médecin', class: 'bg-info', icon: 'fa-user-doctor' },
       'FONCIER': { label: 'Foncier', class: 'bg-warning', icon: 'fa-landmark' },
-      'ANAD': { label: 'ANAD', class: 'bg-primary', icon: 'fa-file-medical' }
+      'ANAD': { label: 'ANAD', class: 'bg-primary', icon: 'fa-file-medical' },
+      'SUPER_ADMIN': { label: 'Super Admin', class: 'bg-danger', icon: 'fa-crown' }
     }
     const roleInfo = roles[role] || { label: role, class: 'bg-secondary', icon: 'fa-user' }
     return (
@@ -101,7 +103,8 @@ export default function ProductPage(){
       'AGRICULTURE': { icon: 'fa-seedling', color: 'text-success' },
       'SANTE': { icon: 'fa-heart-pulse', color: 'text-info' },
       'FONCIER': { icon: 'fa-landmark', color: 'text-warning' },
-      'ANAD': { icon: 'fa-file-medical', color: 'text-primary' }
+      'ANAD': { icon: 'fa-file-medical', color: 'text-primary' },
+      'SUPER_ADMIN': { icon: 'fa-crown', color: 'text-green' }
     }
     return icons[category] || { icon: 'fa-cube', color: 'text-secondary' }
   }
