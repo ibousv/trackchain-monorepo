@@ -17,7 +17,9 @@ TrackChain is positioned as a flexible framework ready for rapid deployment in a
 - Agriculture
 - Land Registry
 - Healthcare
-
+## Links
+- **[Certification](https://limewire.com/d/Lm4Vi#J1SfirYOyT)**
+- **[Pitch deck](https://pitch.com/v/trackchain-pitchdeck-3yzjkt)**
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
